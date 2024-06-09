@@ -53,7 +53,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -72,14 +71,10 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:2.51.1")
     ksp ("com.google.dagger:hilt-compiler:2.51.1")
 
-    // For instrumentation tests
     androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.51.1")
     kspAndroidTest ("com.google.dagger:hilt-compiler:2.51.1")
 
-    // For local unit tests
+
     testImplementation ("com.google.dagger:hilt-android-testing:2.51.1")
     kspTest ("com.google.dagger:hilt-compiler:2.51.1")
 }
-//kapt {
-//    correctErrorTypes true
-//}
