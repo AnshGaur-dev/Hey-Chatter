@@ -151,6 +151,7 @@ fun SignupScreen(AppnavController: NavController, vm: MyViewModel) {
             Button(
                 onClick = {
                     //AppnavController.navigate(AppScreens.CollegeAdminMainScreen.route)
+                          vm.signup(name = nameState.value.text, number = numberState.value.text, email = emailState.value.text,password = passwordState.value.text)
                 },
                 modifier = Modifier.size(width = 150.dp, height = 50.dp),
                 colors = ButtonDefaults.buttonColors(
@@ -158,7 +159,7 @@ fun SignupScreen(AppnavController: NavController, vm: MyViewModel) {
                     contentColor = Color.White,
                 )
             ) {
-                Text(text = "Next")
+                Text(text = "Signup")
             }
 
             Spacer(modifier = Modifier.height(15.dp))
