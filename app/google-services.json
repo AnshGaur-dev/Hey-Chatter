@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "64710279471",
+    "project_id": "hey-chatter-884a8",
+    "storage_bucket": "hey-chatter-884a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64710279471:android:cf7d1d9ea3826a07b2a1da",
+        "android_client_info": {
+          "package_name": "com.example.heychatter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv4gVJUFhgLODOTOsGo80QFN7hKyM21Ds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
