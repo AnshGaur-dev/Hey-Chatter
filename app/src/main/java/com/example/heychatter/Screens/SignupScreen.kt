@@ -33,6 +33,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.heychatter.CommonProgressBar
 import com.example.heychatter.DestinationScreen
 import com.example.heychatter.MyViewModel
 import com.example.heychatter.R
@@ -124,7 +125,7 @@ fun SignupScreen(AppnavController: NavController, vm: MyViewModel) {
                     unfocusedLabelColor = Color.Black,
                     focusedBorderColor = Color.Transparent,
                     unfocusedBorderColor = Color.Transparent,
-                    )
+                )
             )
             Spacer(modifier = Modifier.height(18.dp))
 
@@ -151,7 +152,12 @@ fun SignupScreen(AppnavController: NavController, vm: MyViewModel) {
             Button(
                 onClick = {
                     //AppnavController.navigate(AppScreens.CollegeAdminMainScreen.route)
-                          vm.signup(name = nameState.value.text, number = numberState.value.text, email = emailState.value.text,password = passwordState.value.text)
+                    vm.signup(
+                        name = nameState.value.text,
+                        number = numberState.value.text,
+                        email = emailState.value.text,
+                        password = passwordState.value.text
+                    )
                 },
                 modifier = Modifier.size(width = 150.dp, height = 50.dp),
                 colors = ButtonDefaults.buttonColors(
@@ -173,5 +179,8 @@ fun SignupScreen(AppnavController: NavController, vm: MyViewModel) {
                 fontWeight = FontWeight.SemiBold
             )
         }
+    }
+    if (vm.inProcess.value) {
+        CommonProgressBar()
     }
 }
