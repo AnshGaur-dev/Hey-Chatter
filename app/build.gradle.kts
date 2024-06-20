@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -70,17 +71,16 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
+
+
     implementation ("com.google.dagger:hilt-android:2.51.1")
     ksp ("com.google.dagger:hilt-compiler:2.51.1")
-
     androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.51.1")
     kspAndroidTest ("com.google.dagger:hilt-compiler:2.51.1")
-
-
     testImplementation ("com.google.dagger:hilt-android-testing:2.51.1")
     kspTest ("com.google.dagger:hilt-compiler:2.51.1")
-
-
 
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-compose:$nav_version")

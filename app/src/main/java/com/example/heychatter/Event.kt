@@ -9,9 +9,5 @@ open class Event<out T>(val content: T) {
             hasbeenhandled = true
             return content
         }
-
-
     }
-
-
 }

@@ -183,4 +183,7 @@ fun SignupScreen(AppnavController: NavController, vm: MyViewModel) {
     if (vm.inProcess.value) {
         CommonProgressBar()
     }
+    else{
+
+    }
 }
