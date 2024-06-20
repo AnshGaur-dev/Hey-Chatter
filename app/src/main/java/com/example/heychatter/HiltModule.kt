@@ -18,6 +18,8 @@ class HiltModule {
     @ViewModelScoped//The @ViewModelScoped annotation in Dagger Hilt ensures that a dependency, such as FirebaseAuth, is created once per ViewModel instance and reused within that ViewModel.
     fun provideAuthentication(): FirebaseAuth = FirebaseAuth.getInstance()
 
+    @Provides
+    fun provideFirebaseFirestore():FirebaseFirestore=FirebaseFirestore.getInstance()
      }
 
 //@Module: This tells Hilt that this class provides dependencies.

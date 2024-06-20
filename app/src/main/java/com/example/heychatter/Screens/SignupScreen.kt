@@ -33,6 +33,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.heychatter.CheckSignedin
 import com.example.heychatter.CommonProgressBar
 import com.example.heychatter.DestinationScreen
 import com.example.heychatter.MyViewModel
@@ -41,6 +42,7 @@ import com.example.heychatter.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignupScreen(AppnavController: NavController, vm: MyViewModel) {
+    CheckSignedin(vm = vm, navController =AppnavController )
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -182,8 +184,7 @@ fun SignupScreen(AppnavController: NavController, vm: MyViewModel) {
     }
     if (vm.inProcess.value) {
         CommonProgressBar()
-    }
-    else{
+    } else {
 
     }
 }

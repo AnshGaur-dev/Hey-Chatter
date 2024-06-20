@@ -22,8 +22,15 @@ class MyViewModel @Inject constructor(
     var inProcess = mutableStateOf(false)
     val eventMutableState = mutableStateOf<Event<String>?>(null)
     var signincheck = mutableStateOf(false)
-     var userData = mutableStateOf<UserData?>(null)
+    var userData = mutableStateOf<UserData?>(null)
 
+    init {
+        val currentuser=auth.currentUser
+        signincheck.value=currentuser!=null
+        currentuser?.uid?.let {
+            getUserData(it)
+        }
+    }
     fun signup(name: String, number: String, email: String, password: String) {
         inProcess.value = true
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
@@ -44,22 +51,22 @@ class MyViewModel @Inject constructor(
     ) {
         var uid = auth.currentUser?.uid //accessing userid
         val userData = UserData(
-            name =name?: userData.value?.name,
-            number = number?:userData.value?.number,
-            imageurl =imageurl?: userData.value?.imageurl,
+            name = name ?: userData.value?.name,
+            number = number ?: userData.value?.number,
+            imageurl = imageurl ?: userData.value?.imageurl,
             userid = uid
         )
         uid?.let {
             inProcess.value = true
             db.collection(USER_NODE).document(uid).get().addOnSuccessListener {
                 if (it.exists()) {
-                //Yeah Update k liye h
+                    //Yeah Update k liye h
 
                 } else {
                     getUserData(uid)
                 }
-            }.addOnFailureListener{
-                handleException(it,"Cannot Retrive User")
+            }.addOnFailureListener {
+                handleException(it, "Cannot Retrive User")
             }
         }
     }
@@ -72,17 +79,17 @@ class MyViewModel @Inject constructor(
         eventMutableState.value = Event(message)
         inProcess.value = false
     }
-    fun getUserData(uid:String){
-        inProcess.value=true
-        db.collection(USER_NODE).document(uid).addSnapshotListener{
-            value,error->
-            if(value!=null){
-                var user=value.toObject<UserData>()
-                userData.value=user
-                inProcess.value=false
+
+    fun getUserData(uid: String) {
+        inProcess.value = true
+        db.collection(USER_NODE).document(uid).addSnapshotListener { value, error ->
+            if (value != null) {
+                var user = value.toObject<UserData>()
+                userData.value = user
+                inProcess.value = false
             }
-            if (error!=null){
-                handleException(error,"Cannot Retrive User")
+            if (error != null) {
+                handleException(error, "Cannot Retrive User")
             }
         }
 
