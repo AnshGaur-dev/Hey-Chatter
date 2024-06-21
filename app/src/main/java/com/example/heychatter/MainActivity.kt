@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
                 SignupScreen(appNavController, vm)
             }
             composable(DestinationScreen.Login.route) {
-                LoginScreen(appNavController)
+                LoginScreen(appNavController,vm)
             }
             composable(DestinationScreen.ChatList.route) {
                 ChatListScreen(appNavController)

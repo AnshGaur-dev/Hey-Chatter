@@ -32,14 +32,25 @@ class MyViewModel @Inject constructor(
         }
     }
     fun signup(name: String, number: String, email: String, password: String) {
+        if (name.isEmpty()or number.isEmpty()or email.isEmpty()or password.isEmpty()){
+            handleException(customMessage = "Please fill all fields")
+            return
+        }
         inProcess.value = true
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-            if (it.isSuccessful) {
-                signincheck.value = true
-                inProcess.value = false
-                CreateOrUpdateProfile(name, number, imageurl = null)
-            } else {
-                handleException(it.exception, "Signup failed")
+        db.collection(USER_NODE).whereEqualTo("number",number).get().addOnSuccessListener {
+            if (it.isEmpty){
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        signincheck.value = true
+                        inProcess.value = false
+                        CreateOrUpdateProfile(name, number, imageurl = null)
+                    } else {
+                        handleException(it.exception, "Signup failed")
+                    }
+                }
+            }else{
+                handleException(customMessage = "User already exists")
+                inProcess.value=false
             }
         }
     }
@@ -70,7 +81,28 @@ class MyViewModel @Inject constructor(
             }
         }
     }
-
+    fun signIn(email: String,password: String){
+        if (email.isEmpty()or password.isEmpty()){
+            handleException(customMessage = "Please fill all fields")
+            return
+        }
+        else{
+            inProcess.value=true
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                if (it.isSuccessful){
+                    signincheck.value=true
+                    inProcess.value=false
+                    auth.currentUser?.uid.let {
+                        if (it != null) {
+                            getUserData(it)
+                        }
+                    }
+                }else{
+                    handleException(it.exception,"Login failed")
+                }
+            }
+        }
+    }
     fun handleException(exception: Exception? = null, customMessage: String? = null) {
         Log.d("Error", "Signup failed: ", exception)
         exception?.printStackTrace()

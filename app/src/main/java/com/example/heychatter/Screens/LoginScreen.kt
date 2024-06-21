@@ -34,19 +34,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.heychatter.DestinationScreen
+import com.example.heychatter.MyViewModel
 import com.example.heychatter.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(AppnavController: NavController) {
+fun LoginScreen(AppnavController: NavController,vm:MyViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
         contentAlignment = Alignment.TopCenter,
     ) {
-        val nameState = remember { mutableStateOf(TextFieldValue()) }
         val emailState = remember { mutableStateOf(TextFieldValue()) }
-        val numberState = remember { mutableStateOf(TextFieldValue()) }
         val passwordState = remember { mutableStateOf(TextFieldValue()) }
 
         Image(
@@ -130,7 +129,8 @@ fun LoginScreen(AppnavController: NavController) {
 
             Button(
                 onClick = {
-                    //AppnavController.navigate(AppScreens.CollegeAdminMainScreen.route)
+                    vm.signIn(email = emailState.value.text, password = passwordState.value.text)
+                    AppnavController.navigate(DestinationScreen.ChatList.route)
                 },
                 modifier = Modifier.size(width = 150.dp, height = 50.dp),
                 colors = ButtonDefaults.buttonColors(
@@ -138,7 +138,7 @@ fun LoginScreen(AppnavController: NavController) {
                     contentColor = Color.White,
                 )
             ) {
-                Text(text = "Next")
+                Text(text = "Login")
             }
 
             Spacer(modifier = Modifier.height(15.dp))

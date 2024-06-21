@@ -42,7 +42,9 @@ fun CheckSignedin(vm: MyViewModel, navController: NavController) {
     val alreadySignIn = remember { mutableStateOf(false) }
     val signIn=vm.signincheck.value
     if (signIn && !alreadySignIn.value){
-        navController.navigate(DestinationScreen.ChatList.route)
+        navController.navigate(DestinationScreen.ChatList.route){
+            popUpTo(0)
+        }
 
     }
 
